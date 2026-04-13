@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "learnmicro": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}

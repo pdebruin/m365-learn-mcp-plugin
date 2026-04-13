@@ -1,0 +1,21 @@
+# ATK build artifacts
+learn-mcp-app/appPackage/build/
+learn-mcp-app/appPackage/.generated/
+
+# Environment secrets (user-specific, local)
+learn-mcp-app/env/.env.*.user
+learn-mcp-app/env/.env.local
+learn-mcp-app/env/.env.dev
+learn-mcp-app/.localConfigs
+
+# Dependencies
+node_modules/
+
+# OS / editor
+.DS_Store
+*.swp
+.vscode/settings.json
+
+# DLP metadata
+*.endpointdlp
+*:sec.endpointdlp
