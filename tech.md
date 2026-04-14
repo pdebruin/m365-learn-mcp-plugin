@@ -1,5 +1,29 @@
 # Technical Details
 
+## Why ATK
+
+There are [several ways to build and publish agents](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/publish) for M365 Copilot:
+
+| Tool | Org catalog | Marketplace | MCP support |
+|---|---|---|---|
+| **M365 Agents Toolkit (ATK)** | ✅ | ✅ | ✅ |
+| Copilot Studio | ✅ | ❌ | ❌ |
+| Agent Builder (in Copilot) | ✅ | ❌ | ❌ |
+| SharePoint agents | ❌ | ❌ | ❌ |
+
+ATK is the only option that supports both marketplace submission and MCP server integration. The others are limited to org-internal distribution, or don't support MCP at all.
+
+## Why declarative agent with MCP plugin
+
+Within ATK, the wizard offers several starting points. We chose **Declarative Agent → Start with an MCP Server** because:
+
+- The Learn MCP Server already exists and is public — no backend to build
+- A declarative agent is configuration-only (manifests + instructions), which is the simplest possible packaging
+- The MCP plugin runtime (`RemoteMCPServer`) connects directly to the server at `learn.microsoft.com/api/mcp` — no proxy, no middleware
+- All 3 tools are read-only with no auth, so no OAuth setup needed
+
+The result is a zero-code agent: a zip of JSON files and icons that tells M365 Copilot where the MCP server is and how to use it.
+
 ## Architecture
 
 ```
