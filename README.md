@@ -17,7 +17,7 @@ Since late 2025, M365 Copilot has gained new extensibility options that move MCP
 | When | What | Significance |
 |---|---|---|
 | Oct 2025 | MCP-based agents roll out to M365 Copilot | Copilot can call MCP servers natively |
-| Dec 2025 | Declarative agents with MCP plugins (preview) | Developers can package MCP servers as installable agents |
+| Dec 2025 | [Declarative agents with MCP plugins](https://devblogs.microsoft.com/microsoft365dev/build-declarative-agents-for-microsoft-365-copilot-with-mcp/) | Developers can package MCP servers as installable agents |
 | Mar 2026 | [ATK v6.6.0 — MCP plugin GA](https://www.voitanos.io/blog/microsoft-365-agents-toolkit-v6-6-0-release-review/) | Production-ready tooling for building and submitting MCP agents |
 | Mar 2026 | [MCP Apps in Copilot Chat](https://devblogs.microsoft.com/microsoft365dev/mcp-apps-now-available-in-copilot-chat/) | Agents can render interactive UI widgets (HTML) inline |
 
