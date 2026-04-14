@@ -1,6 +1,6 @@
-# Learn Docs — M365 Copilot Agent for Microsoft Learn
+# Learn Docs — M365 Copilot MCP Plugin for Microsoft Learn
 
-A declarative agent for Microsoft 365 Copilot Chat that connects to the [Microsoft Learn MCP Server](https://learn.microsoft.com/api/mcp), giving users the ability to search, browse, and read official Microsoft documentation directly from Copilot.
+A declarative agent for Microsoft 365 Copilot Chat that connects to the [Microsoft Learn MCP Server](https://learn.microsoft.com/api/mcp) via an MCP plugin, giving users the ability to search, browse, and read official Microsoft documentation directly from Copilot.
 
 | Agent store listing | Agent in action |
 |---|---|
