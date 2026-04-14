@@ -12,15 +12,15 @@ Today, these tools are available to developers — in VS Code, CLI agents, and a
 
 ## What changed
 
-Since late 2025, M365 Copilot has gained new extensibility options that move MCP-based integrations higher in the stack — closer to end users:
+The [MCP Apps announcement](https://devblogs.microsoft.com/microsoft365dev/mcp-apps-now-available-in-copilot-chat/) (March 2026) was the trigger — agents can now bring interactive UI into M365 Copilot Chat. But for Learn MCP Server, the interactive UI path (MCP Apps) has unclear added value over just browsing learn.microsoft.com. Rendering docs in a chat widget is a worse browser.
+
+What's more interesting is the tools-only path that came before it: **MCP plugins** let you create a declarative agent backed by an MCP server — no UI, just tool calls with text responses and citations — and publish it to the M365 marketplace.
 
 | When | What | Significance |
 |---|---|---|
-| Dec 2025 | [Declarative agents with MCP plugins](https://devblogs.microsoft.com/microsoft365dev/build-declarative-agents-for-microsoft-365-copilot-with-mcp/) | Developers can package MCP servers as installable agents |
+| Dec 2025 | [Declarative agents with MCP plugins](https://devblogs.microsoft.com/microsoft365dev/build-declarative-agents-for-microsoft-365-copilot-with-mcp/) | Developers can package MCP servers as installable Copilot agents |
 | Mar 2026 | [ATK v6.6.0 — MCP plugin GA](https://www.voitanos.io/blog/microsoft-365-agents-toolkit-v6-6-0-release-review/) | Production-ready tooling for building and submitting MCP agents |
-| Mar 2026 | [MCP Apps in Copilot Chat](https://devblogs.microsoft.com/microsoft365dev/mcp-apps-now-available-in-copilot-chat/) | Agents can render interactive UI widgets (HTML) inline |
-
-This creates a new integration layer for Learn MCP Server — one that puts it in the Agent Store, discoverable and installable by anyone with a Copilot license.
+| Mar 2026 | [MCP Apps in Copilot Chat](https://devblogs.microsoft.com/microsoft365dev/mcp-apps-now-available-in-copilot-chat/) | Agents can also render interactive UI widgets (HTML) inline |
 
 ## Integration layers
 
@@ -37,19 +37,19 @@ Moving up the stack increases discoverability but adds packaging requirements (m
 
 ## What this project is
 
-A declarative agent — configuration only, no backend — that packages the Learn MCP Server as an installable M365 Copilot agent. Users find it in the store, add it, and ask documentation questions grounded in official Microsoft content.
+A proof of concept for the product layer: a declarative agent — configuration only, no backend — that packages the Learn MCP Server as an installable M365 Copilot agent. Users find it in the store, add it, and ask documentation questions grounded in official Microsoft content.
 
-It uses an **MCP plugin** (tool-only, text responses with citations), not an **MCP App** (interactive UI widgets). The distinction matters:
+This is an **MCP plugin** (tool-only, text responses with citations), not an **MCP App** (interactive UI widgets). We chose the plugin path deliberately:
 
-- **MCP plugin** = agent calls MCP server tools, returns text. What we built.
-- **MCP App** = agent renders rich HTML UI inline in chat (forms, diagrams, dashboards). A future opportunity if the UI adds value beyond linking to learn.microsoft.com.
+- **MCP plugin** = agent calls MCP server tools, returns text with citation links. Simple, publishable to marketplace, and the AI synthesis (cross-article answers, contextual code samples) is the value add over browsing learn.microsoft.com directly.
+- **MCP App** = agent renders rich HTML UI inline in chat. For Learn content, it's unclear what UI would add beyond what the browser already does well.
 
 ## Open questions
 
-- **Is this useful as a product?** Does a "Learn Docs" agent in the store add enough value over opening learn.microsoft.com, or does the AI synthesis (cross-article answers, contextual code samples) justify it?
+- **Is this useful as a product?** Does a "Learn Docs" agent in the store add enough value, or is opening learn.microsoft.com good enough? The hypothesis is that AI synthesis — cross-article answers, contextual code samples, conversational follow-ups — justifies the agent.
 - **Should we publish to the marketplace?** The agent can go to the [Microsoft Commercial Marketplace](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/publish) via Partner Center. Worth pursuing?
-- **MCP App / UI widgets — when?** Only if the UI adds something the browser can't: multi-doc synthesis views, interactive architecture diagrams, code playgrounds. Not for rendering what's already on learn.microsoft.com.
 - **ChatGPT store?** Same MCP server, different submission process. Read-only, public, no auth — straightforward if we want cross-platform reach.
+- **MCP App later?** Only if we find a UI that adds something the browser can't: multi-doc synthesis views, interactive architecture diagrams, code playgrounds.
 
 ## Implementation
 

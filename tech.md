@@ -77,7 +77,7 @@ Tells the agent to always search documentation before answering, use the right t
 
 ### Timeline
 
-MCP server support for M365 Copilot declarative agents was announced at **Ignite 2025** (preview) and reached **GA in March 2026** with ATK v6.6.0. This project was built in April 2026.
+MCP server support for M365 Copilot declarative agents was [announced in December 2025](https://devblogs.microsoft.com/microsoft365dev/build-declarative-agents-for-microsoft-365-copilot-with-mcp/) and reached **GA in March 2026** with ATK v6.6.0. This project was built in April 2026.
 
 ### What worked
 
