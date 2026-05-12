@@ -1,10 +1,10 @@
 {
     "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.4/schema.json",
     "schema_version": "v2.4",
-    "name_for_human": "Microsoft Learn Docs",
-    "description_for_human": "Search and browse official Microsoft Learn documentation, code samples, and articles.",
-    "contact_email": "publisher-email@example.com",
-    "namespace": "learnmcpapp",
+    "name_for_human": "Learn Docs",
+    "description_for_human": "Get answers grounded in official Microsoft Learn documentation.",
+    "contact_email": "learnks@microsoft.com",
+    "namespace": "learndocs",
     "functions": [
         {
             "name": "microsoft_code_sample_search",

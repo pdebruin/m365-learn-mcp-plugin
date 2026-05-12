@@ -18,8 +18,8 @@
         "full": "Microsoft Learn Documentation Assistant"
     },
     "description": {
-        "short": "Search and browse Microsoft Learn documentation from Copilot Chat",
-        "full": "A Copilot agent that searches Microsoft Learn documentation, finds code samples, and fetches full article content. Powered by the Microsoft Learn MCP Server. Ask about any Microsoft or Azure technology and get answers grounded in official documentation."
+        "short": "Get answers grounded in official Microsoft Learn documentation.",
+        "full": "Ask about Microsoft products and services and get answers grounded in trusted up-to-date Microsoft Learn product documentation with citations."
     },
     "accentColor": "#FFFFFF",
     "supportsChannelFeatures": "tier1",
