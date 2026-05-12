@@ -1,15 +1,18 @@
 # ATK build artifacts
-learn-mcp-app/appPackage/build/
-learn-mcp-app/appPackage/.generated/
+learn-docs/appPackage/build/
+learn-docs/appPackage/.generated/
 
 # Environment secrets (user-specific, local)
-learn-mcp-app/env/.env.*.user
-learn-mcp-app/env/.env.local
-learn-mcp-app/env/.env.dev
-learn-mcp-app/.localConfigs
+learn-docs/env/.env.*.user
+learn-docs/env/.env.local
+learn-docs/env/.env.dev
+learn-docs/.localConfigs
 
 # Dependencies
 node_modules/
+
+# Private/internal docs
+ignore/
 
 # OS / editor
 .DS_Store

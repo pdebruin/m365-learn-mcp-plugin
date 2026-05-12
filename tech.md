@@ -1,29 +1,5 @@
 # Technical Details
 
-## Why ATK
-
-There are [several ways to build and publish agents](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/publish) for M365 Copilot:
-
-| Tool | Org catalog | Marketplace | MCP support |
-|---|---|---|---|
-| **M365 Agents Toolkit (ATK)** | ✅ | ✅ | ✅ |
-| Copilot Studio | ✅ | ❌ | ❌ |
-| Agent Builder (in Copilot) | ✅ | ❌ | ❌ |
-| SharePoint agents | ❌ | ❌ | ❌ |
-
-ATK is the only option that supports both marketplace submission and MCP server integration. The others are limited to org-internal distribution, or don't support MCP at all.
-
-## Why declarative agent with MCP plugin
-
-Within ATK, the wizard offers several starting points. We chose **Declarative Agent → Start with an MCP Server** because:
-
-- The Learn MCP Server already exists and is public — no backend to build
-- A declarative agent is configuration-only (manifests + instructions), which is the simplest possible packaging
-- The MCP plugin runtime (`RemoteMCPServer`) connects directly to the server at `learn.microsoft.com/api/mcp` — no proxy, no middleware
-- All 3 tools are read-only with no auth, so no OAuth setup needed
-
-The result is a zero-code agent: a zip of JSON files and icons that tells M365 Copilot where the MCP server is and how to use it.
-
 ## Architecture
 
 ```
@@ -35,7 +11,7 @@ The result is a zero-code agent: a zip of JSON files and icons that tells M365 C
 └─────────────────────┘                                └──────────────────────────┘
 ```
 
-The agent has **no backend**. It's a configuration-only app package that tells M365 Copilot:
+The agent has no backend. It's a configuration-only app package that tells M365 Copilot:
 - What MCP server to connect to (`https://learn.microsoft.com/api/mcp`)
 - What tools are available (3 tools, read-only, no auth)
 - How to behave (instructions, conversation starters)
@@ -45,7 +21,7 @@ The Learn MCP Server is public and requires no authentication.
 ## Project structure
 
 ```
-learn-mcp-app/
+learn-docs/
 ├── appPackage/
 │   ├── manifest.json            # Teams app manifest (v1.25)
 │   ├── declarativeAgent.json    # Agent config (v1.6) — name, starters, actions
@@ -97,38 +73,16 @@ Includes `inputSchema`, `outputSchema`, and `annotations` (with `readOnlyHint: t
 
 Tells the agent to always search documentation before answering, use the right tool for the right task (search → code samples → fetch), and include source links.
 
-## How we built this
-
-### Timeline
-
-MCP server support for M365 Copilot declarative agents was [announced in December 2025](https://devblogs.microsoft.com/microsoft365dev/build-declarative-agents-for-microsoft-365-copilot-with-mcp/) and reached **GA in March 2026** with ATK v6.6.0. This project was built in April 2026.
-
-### What worked
-
-1. **ATK wizard scaffolding** — Created a new declarative agent via "Start with an MCP Server" in the M365 Agents Toolkit VS Code extension
-2. **ATK "Fetch action from MCP" button** — Pulled tool schemas directly from the live server, generating correctly-formatted `ai-plugin.json` and `mcp-tools.json`
-3. **Iterative provisioning** — Small changes, provision, test, repeat
-
-### What didn't work (lessons learned)
-
-We initially hand-crafted all manifest files from documentation. This failed with persistent HTTP 400 errors during `extendToM365`. The errors were unhelpful ("Internal Error - Failed to make a successful HTTP request"). After extensive debugging, the root causes were:
+## Troubleshooting
 
 | Problem | Symptom | Fix |
 |---|---|---|
-| `mcp-tools.json` was a bare array `[...]` | 400 during `extendToM365` | Must be `{"tools": [...]}` |
+| `mcp-tools.json` is a bare array `[...]` | 400 during `extendToM365` | Must be `{"tools": [...]}` |
 | Missing `$schema` in `ai-plugin.json` | Validation failure | Add `"$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.4/schema.json"` |
 | Missing `namespace` and `contact_email` | Validation failure | Required fields in ai-plugin.json |
-| `run_for_functions` was empty `[]` | Explicit validation error | Must list all function names |
+| `run_for_functions` is empty `[]` | Explicit validation error | Must list all function names |
 | Old schema versions (manifest v1.19, agent v1.3) | Silent failures | Use manifest v1.25, agent v1.6, YAML v1.11 |
-| Config file named `teamsapp.yml` | ATK didn't recognize project | Must be `m365agents.yml` for ATK v6.3+ |
-
-**Lesson:** Use the ATK wizard to scaffold and fetch tools. Don't hand-craft manifest files — the validation is opaque and the format requirements are underdocumented.
-
-### Prerequisites that blocked us
-
-- **Copilot license** — Even on M365 Developer Program sandbox tenants, you must purchase and assign a Copilot license. Without it: "Microsoft 365 account administrator hasn't enabled Copilot access for this account"
-- **Custom app upload** — Must be enabled in Teams admin center → Setup policies → Upload custom apps
-- **Version bumping** — Every `extendToM365` call requires a higher `version` in manifest.json than the previous deployment
+| Config file named `teamsapp.yml` | ATK doesn't recognize project | Must be `m365agents.yml` for ATK v6.3+ |
 
 ## Getting started
 
@@ -142,7 +96,7 @@ We initially hand-crafted all manifest files from documentation. This failed wit
 
 ### Provision & test
 
-1. Open `learn-mcp-app/` in VS Code
+1. Open `learn-docs/` in VS Code
 2. Open the ATK sidebar → click **Provision** → select **dev**
 3. ATK runs 4 steps: create app → zip package → update app → extend to M365
 4. Open [m365.cloud.microsoft/chat](https://m365.cloud.microsoft/chat)
